@@ -7,32 +7,105 @@
     <!-- Tambahan CSS -->
     <style>
         body {
-            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #a6e9a6;
         }
-        .login-box {
-            margin: 5% auto;
-            width: 400px;
+
+        .login-container {
+            display: flex;
+            max-width: 1200px; /* Ubah max-width sesuai kebutuhan */
+            background-color: #fff;
+            color: #186218;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-container {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .left-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .right-container {
+            flex: 1;
+            padding: 40px; /* Menambahkan padding untuk memperbesar area formulir */
+        }
+
+        .login-form {
+            max-width: 400px; /* Sesuaikan dengan kebutuhan */
+            margin: 0 auto;
+        }
+
+        .login-form h2 {
+            text-align: center; /* Tengahkan judul */
+        }
+
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: none; /* Hapus border */
+            border-bottom: 1px solid #ccc; /* Tambahkan garis bawah */
+            outline: none; /* Hapus outline */
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .register-link a {
+            color: #3498db;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="login-box">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="text-center mb-4">Login</h3>
-                    <form id="loginForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-block" onclick="loginUser()">Login</button>
-                        </div>
-                    </form>
-                    <p class="text-center mt-3 mb-0">Belum punya akun? <a href="register.php">Registrasi di sini</a></p>
+<div class="login-container">
+        <div class="left-container">
+            <img src="assets/images/hospital.png" alt="Login Image">
+        </div>
+        <div class="right-container">
+            <div class="login-form">
+                <h2>Login</h2>
+                <form id="loginForm">
+                    <label for="username">Username :</label>
+                    <input type="text" id="username" name="username" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="button" class="btn btn-primary btn-block" onclick="loginUser()">Login</button>
+                </form>
+
+                <div class="register-link">
+                    <p>Belum punya akun? <a href="register.php">Daftar disini</a></p>
                 </div>
             </div>
         </div>
