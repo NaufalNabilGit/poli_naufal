@@ -9,7 +9,7 @@
         <a href="dashboard_admin.php" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../logout.php" class="nav-link">Logout</a>
+        <a href="logout.php" class="nav-link">Logout</a>
       </li>
 
     </ul>
