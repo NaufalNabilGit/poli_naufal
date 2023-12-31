@@ -1,31 +1,45 @@
 <?php
 // Koneksi ke database (Sesuaikan dengan koneksi Anda)
-$conn = mysqli_connect('localhost', 'root', '', 'poli');
+$conn = mysqli_connect('localhost', 'root', '', 'poli_bk');
 
 if (!$conn) {
     die("Koneksi ke database gagal: " . mysqli_connect_error());
 }
 
 // Ambil data dari form registrasi
-$username = $_POST['username'];
-$password = $_POST['password'];
-$role = $_POST['role'];
+$nama = $_POST['nama'];
+$alamat = $_POST['alamat'];
+$no_ktp = $_POST['no_ktp'];
+$no_hp = $_POST['no_hp'];
 
-$query = "INSERT INTO user_login (username, password, role) VALUES ('$username', '$password', '$role')";
-$result = mysqli_query($conn, $query);
+// Check apakah nomor KTP atau nomor HP sudah ada di database
+$check_query = "SELECT * FROM pasien WHERE no_ktp = '$no_ktp' OR no_hp = '$no_hp'";
+$check_result = mysqli_query($conn, $check_query);
 
-if ($result) {
-    // Registrasi sukses
-    $response = [
-        'success' => true,
-        'message' => 'Registrasi Berhasil! Anda berhasil terdaftar. Silakan login untuk melanjutkan.'
-    ];
-} else {
-    // Registrasi gagal
+if (mysqli_num_rows($check_result) > 0) {
+    // Data sudah ada dalam database, tidak boleh sama
     $response = [
         'success' => false,
-        'message' => 'Registrasi Gagal. Terjadi kesalahan. Silakan coba lagi.'
+        'message' => 'Nomor KTP atau Nomor HP sudah terdaftar. Masukkan nomor yang berbeda.'
     ];
+} else {
+    // Data belum ada dalam database, bisa dilakukan registrasi
+    $query = "INSERT INTO pasien (nama, alamat, no_ktp, no_hp) VALUES ('$nama', '$alamat', '$no_ktp', '$no_hp')";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        // Registrasi sukses
+        $response = [
+            'success' => true,
+            'message' => 'Registrasi Pasien Berhasil! Pasien berhasil terdaftar.'
+        ];
+    } else {
+        // Registrasi gagal
+        $response = [
+            'success' => false,
+            'message' => 'Registrasi Pasien Gagal. Terjadi kesalahan. Silakan coba lagi.'
+        ];
+    }
 }
 
 mysqli_close($conn);

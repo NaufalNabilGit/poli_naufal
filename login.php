@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -13,12 +14,13 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #a6e9a6;
+            background-color: lightblue;
         }
 
         .login-container {
             display: flex;
-            max-width: 1200px; /* Ubah max-width sesuai kebutuhan */
+            max-width: 1200px;
+            /* Ubah max-width sesuai kebutuhan */
             background-color: #fff;
             color: #186218;
             border-radius: 8px;
@@ -39,16 +41,19 @@
 
         .right-container {
             flex: 1;
-            padding: 40px; /* Menambahkan padding untuk memperbesar area formulir */
+            padding: 40px;
+            /* Menambahkan padding untuk memperbesar area formulir */
         }
 
         .login-form {
-            max-width: 400px; /* Sesuaikan dengan kebutuhan */
+            max-width: 400px;
+            /* Sesuaikan dengan kebutuhan */
             margin: 0 auto;
         }
 
         .login-form h2 {
-            text-align: center; /* Tengahkan judul */
+            text-align: center;
+            /* Tengahkan judul */
         }
 
         .login-form label {
@@ -60,9 +65,12 @@
             width: 100%;
             padding: 8px;
             margin-bottom: 16px;
-            border: none; /* Hapus border */
-            border-bottom: 1px solid #ccc; /* Tambahkan garis bawah */
-            outline: none; /* Hapus outline */
+            border: none;
+            /* Hapus border */
+            border-bottom: 1px solid #ccc;
+            /* Tambahkan garis bawah */
+            outline: none;
+            /* Hapus outline */
         }
 
         .login-form button {
@@ -86,70 +94,74 @@
         }
     </style>
 </head>
+
 <body>
-<div class="login-container">
+    <div class="login-container">
         <div class="left-container">
             <img src="assets/images/hospital.png" alt="Login Image">
         </div>
         <div class="right-container">
             <div class="login-form">
-                <h2>Login</h2>
+                <h2>Login </h2>
                 <form id="loginForm">
-                    <label for="username">Username :</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="nama">Username :</label>
+                    <input type="text" id="nama" name="nama" required>
 
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="no_hp">Nomor Handphone :</label>
+                    <input type="password" id="no_hp" name="no_hp" required>
 
                     <button type="button" class="btn btn-primary btn-block" onclick="loginUser()">Login</button>
+
                 </form>
 
                 <div class="register-link">
-                    <p>Belum punya akun? <a href="register.php">Daftar disini</a></p>
+                <p><b>Belum Punya Akun?</b> <a href="register.php">Registrasi disini</a></p>
                 </div>
             </div>
         </div>
     </div>
-    
-    <script>
-    function loginUser() {
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
 
-        // Kirim data ke PHP untuk proses login
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'process_login.php');
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.status === 'success') {
-                    // Handle login berhasil
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Login Berhasil!',
-                        text: response.welcome_message,
-                        timer: 3000,
-                        showConfirmButton: false
-                    }).then(function () {
-                        window.location.href = response.redirect_url;
-                    });
-                } else {
-                    // Handle login gagal
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Login Gagal',
-                        text: response.message
-                    });
+    <script>
+        function loginUser() {
+            var nama = document.getElementById('nama').value;
+            var no_hp = document.getElementById('no_hp').value;
+
+            // Kirim data ke PHP untuk proses login
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'process_login.php');
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.status === 'success') {
+                        // Handle login berhasil
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Login Berhasil!',
+                            text: response.welcome_message,
+                            timer: 3000,
+                            showConfirmButton: false
+                        }).then(function () {
+                            window.location.href = response.redirect_url;
+                        });
+                    } else {
+                        // Handle login gagal
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Gagal',
+                            text: response.message
+                        });
+                    }
                 }
-            }
-        };
-        var params = 'username=' + username + '&password=' + password;
-        xhr.send(params);
-    }
-</script>
-</body>
-</html>
+            };
+            var params = 'nama=' + nama + '&no_hp=' + no_hp;
+            xhr.send(params);
+        }
     </script>
 </body>
+
+</html>
+</script>
+</body>
+
 </html>
