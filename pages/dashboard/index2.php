@@ -1,3 +1,17 @@
+<?php
+    require 'config/koneksi.php';
+    $id_poli = $_SESSION['id_poli'];
+
+    $query_poli = "SELECT nama_poli FROM poli WHERE id = $id_poli";
+    $result = mysqli_query($mysqli,$query_poli);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $nama_poli = $row['nama_poli'];
+    } else {
+        $nama_poli = "Tidak dapat mendapatkan nama poli";
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,184 +19,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dokter Dashboard</title>
-    <!-- Link to Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <style>
-        /* Style umum untuk teks putih */
-        .text-white {
-            font-weight: 500;
-            /* membuat teks sedikit lebih tebal */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e6eeff;
+            margin: 0;
+            padding: 0;
         }
 
-        /* Mengubah ukuran dan gaya font untuk judul dan konten yang berbeda */
-        h1.text-white {
+        .dashboard-header {
+            background-color: #2d4d65;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .dashboard-header h1 {
+            margin: 0;
             font-size: 2.2rem;
-            /* ukuran font yang lebih besar */
-            font-family: 'Arial', sans-serif;
-            /* ganti dengan font pilihan Anda */
-        }
-
-        h4.text-white {
-            font-size: 1.6rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        h5.text-white {
-            font-size: 1.3rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Gaya khusus untuk teks pada info-box */
-        .info-box-text {
-            font-size: 1rem;
-            /* menyesuaikan ukuran font */
-            margin-bottom: 5px;
-            /* memberikan sedikit ruang di bawah teks */
-        }
-
-        /* Gaya khusus untuk nomor pada info-box */
-        .info-box-number {
-            font-size: 1.2rem;
-            /* menyesuaikan ukuran font */
             font-weight: bold;
-            /* membuatnya tebal */
+        }
+
+        .dashboard-header h4 {
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
+        .info-card {
+            background-color: #f0f4ff;
+            border-left: 5px solid #3f51b5;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h5 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #5c6bc0;
+            font-weight: bold;
+        }
+
+        .info-card .fa {
+            font-size: 2rem;
+            margin-right: 10px;
+            vertical-align: middle;
+            color: #75a1c0;
+        }
+
+        .info-card p {
+            margin: 0;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .info-card .info-card-body {
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-card {
+            background-color: #f4f8fa; /* Lighter shade for contrast */
+            border-left: 5px solid #b3e5fc; /* A contrasting yet complementary border color */
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-card h5 {
+            font-size: 1.2rem;
+            color: #0277bd; /* A color that stands out yet ties into the theme */
+            font-weight: bold;
+        }
+
+        .custom-card p {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* New layout for custom cards */
+        .custom-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .info-card .info-card-body {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .info-card .fa {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Content Header (Page header) -->
-    <div class="content-header py-5 bg-primary text-white">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1 class="m-0 text-center">Selamat Datang <b>Dokter <?php echo $username ?></b></h1>
-                    <h4 class="m-0 text-center">Saat Ini anda sedang berada di Poliklinik Gigi</h4>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+    <div class="dashboard-header">
+        <h1>Selamat Datang, Dokter <?php echo $username ?></h1>
+        <h4>Saat ini anda berada di,  <?php echo $nama_poli; ?></h4>
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
-    <section class="content mt-5">
-        <div class="container-fluid">
-            <!-- Info boxes -->
+    <section class="content mt-4">
+        <div class="container">
             <div class="row">
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="card card-custom bg-info">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-4">
-                                    <i class="fa fa-check-square fa-3x text-white"></i>
-                                </div>
-                                <div class="col-8">
-                                    <span class="info-box-text text-white">Jumlah Pasien saat ini :</span>
-                                    <span class="info-box-number text-white">150</span>
-                                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <div class="info-card-body">
+                            <i class="fa fa-users text-primary"></i>
+                            <div>
+                                <h5>Jumlah Pasien Sekarang :</h5>
+                                <p>150</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="card card-custom bg-info">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-4">
-                                    <i class="fa fa-calendar-check fa-3x text-white"></i>
-                                </div>
-                                <div class="col-8">
-                                    <span class="info-box-text text-white">Status Kerja saat ini :</span>
-                                    <span class="info-box-number text-white active">Active</span>
-                                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <div class="info-card-body">
+                            <i class="fa fa-calendar text-success"></i>
+                            <div>
+                                <h5>Status Bekerja</h5>
+                                <p>Active</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="card card-custom bg-info">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-4">
-                                    <i class="fa fa-check-square fa-3x text-white"></i>
-                                </div>
-                                <div class="col-8">
-                                    <span class="info-box-text text-white">Pasien Telah Diperiksa :</span>
-                                    <span class="info-box-number text-white">50</span>
-                                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <div class="info-card-body">
+                            <i class="fa fa-check-square text-info"></i>
+                            <div>
+                                <h5>Pasien Telah Diperiksa</h5>
+                                <p>50</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="card card-custom bg-info">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-4">
-                                    <i class="fa fa-calendar-check fa-3x text-white"></i>
-                                </div>
-                                <div class="col-8">
-                                    <span class="info-box-text text-white">Pasien Hari ini :</span>
-                                    <span class="info-box-number text-white">20</span>
-                                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <div class="info-card-body">
+                            <i class="fa fa-hospital text-warning"></i>
+                            <div>
+                                <h5>Pasien Hari ini</h5>
+                                <p>20</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
 
-            <!-- Custom Content Here -->
             <div class="row">
-                <!-- Jadwal Harian Dokter -->
-                <div class="col-12 col-md-6">
-                    <div class="card card-custom bg-warning">
+                <div class="col-md-6">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="text-white">Jadwal Harian</h5>
-                            <ul class="list-unstyled">
-                                <li class="text-white">09:00 - Pasien: Budi</li>
-                                <li class="text-white">10:30 - Pasien: Siti</li>
-                                <!-- Lainnya... -->
-                            </ul>
+                            <h5>Jadwal Harian</h5>
+                            <p>Cek Antrian</p>
+                            <p>Cek Pasien</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-12 col-md-6">
-                    <div class="card card-custom bg-danger">
+                <div class="col-md-6">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="text-white">Notifikasi Penting</h5>
-                            <p class="text-white">Pasien Dengan Kasus Kritis: Ani (Ruangan 305)</p>
-                            <!-- Lainnya... -->
+                            <h5><span style="color : red;">Keadaan Darurat</span></h5>
+                            <p>Pasien Lorem</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-12 col-md-6">
-                    <div class="card card-custom bg-success">
+                <div class="col-md-6">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="text-white">Statistik Mingguan</h5>
-                            <p class="text-white">Pasien Diperiksa Minggu Lalu: 75</p>
-                            <!-- Grafik atau detail lainnya... -->
+                            <h5>Statistik Mingguan</h5>
+                            <p>Pasien Minggu Lalu: 75 Pasien</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-12 col-md-6">
-                    <div class="card card-custom bg-secondary">
+                <div class="col-md-6">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="text-white">Pesan dan Konsultasi</h5>
-                            <p class="text-white">Anda memiliki 5 pesan baru.</p>
-                            <!-- Tautan atau formulir untuk konsultasi... -->
+                            <h5>Pesan dan Konsul</h5>
+                            <p>Kamu memiliki 5 pesan baru</p>
                         </div>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </section>
-    <!-- /.content -->
 
-    <!-- Link to Bootstrap JS and other necessary scripts-->
+    <!-- Bootstrap and other scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

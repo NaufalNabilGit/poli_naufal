@@ -1,77 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Poliklinik</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Tambahan CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #adc7da;
+            opacity: 10;
+        }
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+        .login-container {
+            display: flex;
+            max-width: 1200px;
+            /* Ubah max-width sesuai kebutuhan */
+            background-color: #fff;
+            color: black;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-container {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .left-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .right-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: #f7f7f7;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .login-form h4 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .text-primary {
+            color: #007bff;
+        }
+
+        .login-box-msg {
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .form-control {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-success {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            background-color: lightblue;
+            border: none;
+            color: black;
+            transition: background-color 0.3s;
+        }
+
+        .btn-success:hover {
+            background-color: #46799d;
+        }
+
+
+        .text-center {
+            margin-top: 20px;
+        }
+
+        .text-center a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .text-center a:hover {
+            color: #0056b3;
+        }
+
+
+        .register-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .register-link a {
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="index.php"><b>Poliklinik</b></a>
+<body>
+    <div class="login-container">
+        <div class="left-container">
+            <img src="assets/images/login-bg.png" alt="Login Image">
         </div>
-        <!-- /.login-logo -->
-        <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Silahkan login sebagai <span class="text-primary">Pasien</span> untuk
-                    melanjutkan mendaftar poli</p>
+        <div class="right-container">
+            <div class="login-form">
+                <h4 class="text-center">Login </h4>
+                <p class="login-box-msg text-center">Silahkan login sebagai <span class="text-primary">Pasien</span>
+                    untuk melanjutkan
+                    <br><br>
+                    <form action="pages/loginUser/checkLoginUser.php" method="post">
+                        <label for="nama">Username :</label>
+                        <input type="text" class="form-control" name="username">
 
-                <form action="pages/loginUser/checkLoginUser.php" method="post">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username" name="username">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" name="password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-block btn-primary">
-                        Login
-                    </button>
-                </form>
+                        <label for="no_hp">Password :</label>
+                        <input type="password" class="form-control" name="password" required>
 
-                <div class="social-auth-links text-center mb-3">
-                    <p>- Belum punya akun pasien? -</p>
-                    <a href="register.php" class="btn btn-block btn-secondary">
-                        Register
-                    </a>
-                </div>
-                <!-- /.social-auth-links -->
+                        <button type="submit" class="btn btn-block btn-success">
+                            Login
+                        </button>
+                    </form>
+
             </div>
-            <!-- /.login-card-body -->
+            <div class="text-center mt-3">
+                <p>- Belum punya akun pasien? -</p>
+                <a href="register.php" class="">
+                    Register
+                </a>
+            </div>
         </div>
     </div>
-    <div class="text-center mt-3">Login Sebagai <a href="login.php"><span class="text-success">Dokter</span></a>
     </div>
-    </div>
-    <!-- /.login-box -->
 
-    <!-- jQuery -->
-    <script src="assets/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="assets/dist/js/adminlte.min.js"></script>
+</body>
+
+</html>
+</script>
 </body>
 
 </html>

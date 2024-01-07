@@ -1,15 +1,20 @@
+## WEBSITE BILL'S POLIKLINIK
+
+NAMA : Naufal Nabil Nurherdian
+NIM : A11.2020.13010
+
 ## Admin
 
-username dan passwor admin
+username dan password admin
 ```
-username : Admin
-password : admin
+username : admin    
+password : 123
 ```
 
 ## Dokter
 
 username dokter = password dokter
 ```
-username : coba
-password : coba
+username : naufal
+password : naufal
 ```
