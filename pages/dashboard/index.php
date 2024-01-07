@@ -137,7 +137,7 @@
     <section class="quick-info-section">
         <div class="quick-info-card">
             <img src="assets/images/callcenter.jpg" alt="Quality Care">
-            <h3>Customer Care</h3>
+            <h3>Pelayanan Terlengkap</h3>
         </div>
         <div class="quick-info-card">
             <img src="assets/images/doctor.jpg" alt="Expert Doctors">

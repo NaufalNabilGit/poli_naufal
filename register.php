@@ -103,29 +103,27 @@
 
         .text-center {
 
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
-}
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+        }
 
-h4.text-center {
-    color: #28527a;
-    font-size: 24px;
-    font-weight: 700; 
-    margin-bottom: 15px; 
-    padding-bottom: 5px; 
-    border-bottom: 2px solid #28527a; 
-}
+        h4.text-center {
+            color: #28527a;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #28527a;
+        }
 
-.register-box-msg {
-    color: #333333; 
-    font-size: 16px;
-    margin-bottom:
-}
+        .register-box-msg {
+            color: #333333;
+            font-size: 16px
+        }
 
-.text-primary {
-    color: #3498db;
-    font-weight: 600; 
-}
-
+        .text-primary {
+            color: #3498db;
+            font-weight: 600;
+        }
     </style>
 </head>
 
@@ -138,7 +136,7 @@ h4.text-center {
             <div class="register-form">
                 <h4 class="text-center">Register</h4>
                 <p class="register-box-msg text-center">Daftarkan diri anda sebagai <span
-                        class="text-primary">Pasien</span></p> 
+                        class="text-primary">Pasien</span></p>
                 <form action="pages/register/checkRegister.php" method="post">
                     <!-- Pastikan 'for' dalam label sesuai dengan 'id' di input untuk aksesibilitas yang lebih baik -->
                     <label for="nama">Nama :</label>
